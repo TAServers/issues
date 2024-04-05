@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update completed issue status
-        if: ${{ github.event.issue.state_reason == "completed" }}
+        if: ${{ github.event.issue.state_reason == 'completed' }}
         uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: "Issues & Suggestions"
@@ -18,7 +18,7 @@ jobs:
           repo-token: ${{ github.token }}
 
       - name: Update not planned issue status
-        if: ${{ github.event.issue.state_reason == "not planned" }}
+        if: ${{ github.event.issue.state_reason == 'not planned' }}
         uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: "Issues & Suggestions"
