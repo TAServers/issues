@@ -1,0 +1,28 @@
+name: "GMod: Suggest an Addon"
+description: "Suggest a new addon for the Garry's Mod servers"
+title: "[GMod Addon]: "
+labels: ["type: mod request", "domain: gmod"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before submitting, please check the previous issues to see if someone already suggested this addon.
+
+        If someone has suggested the addon before and it was rejected, please continue the discussion there instead of raising a duplicate issue.
+  - type: input
+    attributes:
+      label: Workshop Link
+      description: Paste a link to the Steam Workshop page for the addon here.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Addon Type
+      description: What type of addon is this?
+      options: ["Map", "Weapon", "Vehicle", "NPC", "Tool", "Entity", "Effects", "Model", "Other"]
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Details
+      description: Give any further details here, such as what the benefit of the addon is and whether you know other people who want it.

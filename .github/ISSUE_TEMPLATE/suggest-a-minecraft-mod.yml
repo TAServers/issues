@@ -1,0 +1,36 @@
+name: "Minecraft: Suggest a mod"
+description: "Suggest a new mod for the Minecraft server"
+title: "[Minecraft Mod]: "
+labels: ["type: mod request", "domain: minecraft"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before submitting, please check the previous issues to see if someone already suggested this mod.
+
+        If someone has suggested the mod before and it was rejected, please continue the discussion there instead of raising a duplicate issue.
+  - type: input
+    attributes:
+      label: Modrinth Link
+      description: Paste a link to the Modrinth page for the mod here. If the mod isn't available on Modrinth, feel free to use CurseForge or a similar official non-download page.
+    validations:
+      required: true
+  - type: dropdown
+    attributes:
+      label: Mod Type(s)
+      description: What type(s) of mod is this?
+      options: ["Adventure/Exploration", "Magic", "Technology", "Decoration", "Equipment", "Mobs", "Storage", "Transportation", "Optimisation", "Social", "Utility", "Other"]
+      multiple: true
+    validations:
+      required: true
+  - type: checkboxes
+    attributes:
+      label: "Supports 1.20.1 Fabric"
+      description: "Please check that the mod supports Minecraft version 1.20.1 and the Fabric modloader."
+      options:
+        - label: "Yes"
+          required: true
+  - type: textarea
+    attributes:
+      label: Details
+      description: Give any further details here, such as what the benefit of the mod is and whether you know other people who want it.
