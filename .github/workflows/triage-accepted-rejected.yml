@@ -54,11 +54,11 @@ jobs:
 
       - name: Set option ID as completed
         if: ${{ github.event.issue.state_reason == 'completed' }}
-        run: echo 'OPTION_ID=$COMPLETED_OPTION_ID' >> $GITHUB_ENV
+        run: echo 'OPTION_ID=${{ env.COMPLETED_OPTION_ID }}' >> $GITHUB_ENV
 
       - name: Set option ID as not planned
         if: ${{ github.event.issue.state_reason == 'not planned' }}
-        run: echo 'OPTION_ID=$NOT_PLANNED_OPTION_ID' >> $GITHUB_ENV
+        run: echo 'OPTION_ID=${{ env.NOT_PLANNED_OPTION_ID }}' >> $GITHUB_ENV
 
       - name: Get or create issue in project
         env:
