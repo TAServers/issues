@@ -1,0 +1,26 @@
+name: Triage accepted and rejected issues
+
+on:
+  issues:
+    types:
+      - closed
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update completed issue status
+        if: ${{ github.event.issue.state_reason == "completed" }}
+        uses: alex-page/github-project-automation-plus@v0.8.3
+        with:
+          project: "Issues & Suggestions"
+          column: "Completed"
+          repo-token: ${{ github.token }}
+
+      - name: Update not planned issue status
+        if: ${{ github.event.issue.state_reason == "not planned" }}
+        uses: alex-page/github-project-automation-plus@v0.8.3
+        with:
+          project: "Issues & Suggestions"
+          column: "Not Planned"
+          repo-token: ${{ github.token }}
