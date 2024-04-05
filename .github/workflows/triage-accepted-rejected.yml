@@ -9,13 +9,20 @@ jobs:
   triage:
     runs-on: ubuntu-latest
     steps:
+      - name: Generate token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.SUGGESTIONS_MANAGER_ID }}
+          private-key: ${{ secrets.SUGGESTIONS_MANAGER_KEY }}
+
       - name: Update completed issue status
         if: ${{ github.event.issue.state_reason == 'completed' }}
         uses: alex-page/github-project-automation-plus@v0.8.3
         with:
           project: "Issues & Suggestions"
           column: "Completed"
-          repo-token: ${{ github.token }}
+          repo-token: ${{ steps.generate-token.outputs.token }}
 
       - name: Update not planned issue status
         if: ${{ github.event.issue.state_reason == 'not planned' }}
@@ -23,4 +30,4 @@ jobs:
         with:
           project: "Issues & Suggestions"
           column: "Not Planned"
-          repo-token: ${{ github.token }}
+          repo-token: ${{ steps.generate-token.outputs.token }}
