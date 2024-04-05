@@ -52,14 +52,6 @@ jobs:
           echo 'COMPLETED_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Completed") |.id' project_data.json) >> $GITHUB_ENV
           echo 'NOT_PLANNED_OPTION_ID='$(jq '.data.organization.projectV2.fields.nodes[] | select(.name== "Status") | .options[] | select(.name=="Not Planned") |.id' project_data.json) >> $GITHUB_ENV
 
-      - name: Set option ID as completed
-        if: ${{ github.event.issue.state_reason == 'completed' }}
-        run: echo 'OPTION_ID=${{ env.COMPLETED_OPTION_ID }}' >> $GITHUB_ENV
-
-      - name: Set option ID as not planned
-        if: ${{ github.event.issue.state_reason == 'not planned' }}
-        run: echo 'OPTION_ID=${{ env.NOT_PLANNED_OPTION_ID }}' >> $GITHUB_ENV
-
       - name: Get or create issue in project
         env:
           GH_TOKEN: ${{ steps.generate-token.outputs.token }}
@@ -99,4 +91,4 @@ jobs:
                   id
                 }
               }
-            }' -f project=$PROJECT_ID -f item=$ITEM_ID -f status_field=$STATUS_FIELD_ID -f status_value=${{ env.OPTION_ID }} --silent
+            }' -f project=$PROJECT_ID -f item=$ITEM_ID -f status_field=$STATUS_FIELD_ID -f status_value=${{ github.event.issue.state_reason == 'completed' && env.COMPLETED_OPTION_ID || env.NOT_PLANNED_OPTION_ID }} --silent
